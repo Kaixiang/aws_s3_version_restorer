@@ -5,9 +5,12 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 #
+require 'aws_s3_version_restorer'
+
 $:.unshift(File.expand_path("../lib", File.dirname(__FILE__)))
 
-require 'aws_s3_version_restorer'
+SPEC_ROOT = File.expand_path(File.dirname(__FILE__))
+Dir.glob("#{SPEC_ROOT}/support/**/*.rb") { |f| require(f) }
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

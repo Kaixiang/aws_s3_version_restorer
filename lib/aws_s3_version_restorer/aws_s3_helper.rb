@@ -42,6 +42,9 @@ module AwsS3VersionRestorer
         restored_objs
       end
 
+      def do_restore(restore_obj)
+      end
+
     end
   end
 end
