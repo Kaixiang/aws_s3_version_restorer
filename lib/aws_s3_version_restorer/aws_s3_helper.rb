@@ -10,8 +10,6 @@ module AwsS3VersionRestorer
 
         aws_init
 
-        raise 'not exist bucket' unless @s3.buckets[bucket_name].exists?
-        raise 'not a versinized bucket' unless @s3.buckets[bucket_name].versioning_enabled?
       end
 
       # Split the restore process into 2 process to give user the chance to track
@@ -78,6 +76,9 @@ module AwsS3VersionRestorer
 
         @s3 = AWS::S3.new
         @bucket = @s3.buckets[@bucket_name]
+
+        raise 'not exist bucket' unless @s3.buckets[@bucket_name].exists?
+        raise 'not a versinized bucket' unless @s3.buckets[@bucket_name].versioning_enabled?
       end
 
     end
