@@ -12,7 +12,7 @@ module AwsS3VersionRestorer::Spec
 
     def setup_test_bucket(bucket_name, version = true)
       raise 'the bucket already exist' if s3.buckets[bucket_name].exists?
-      bucket = @s3.buckets.create(bucket_name)
+      bucket = s3.buckets.create(bucket_name)
       bucket.enable_versioning if version
     end
 
@@ -25,13 +25,13 @@ module AwsS3VersionRestorer::Spec
 
     def upload_blob(bucket_name, blob_name, content)
       raise 'the bucket not exist' unless s3.buckets[bucket_name].exists?
-      bucket = @s3.buckets[bucket_name]
+      bucket = s3.buckets[bucket_name]
       bucket.objects.create(blob_name, content)
     end
 
     def delete_blob(bucket_name, object)
       raise 'the bucket not exist' unless s3.buckets[bucket_name].exists?
-      bucket = @s3.buckets[bucket_name]
+      bucket = s3.buckets[bucket_name]
       raise 'obj not exist' unless bucket.objects[object].exists?
       bucket.objects[object].delete
     end
@@ -41,6 +41,16 @@ module AwsS3VersionRestorer::Spec
       bucket = s3.buckets[bucket_name]
       raise 'obj not exist' unless bucket.objects[object].exists?
       bucket.objects[object].read
+    end
+
+    def object_exists?(bucket_name, object)
+      raise 'the bucket not exist' unless s3.buckets[bucket_name].exists?
+      bucket = s3.buckets[bucket_name]
+      bucket.objects[object].exists?
+    end
+
+    def bucket_exists?(bucket_name)
+      s3.buckets[bucket_name].exists?
     end
 
   end
