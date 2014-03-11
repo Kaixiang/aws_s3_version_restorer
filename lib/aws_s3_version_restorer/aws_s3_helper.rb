@@ -65,8 +65,8 @@ module AwsS3VersionRestorer
       private
 
       def aws_init
-        raise 'no key_id found' if @key_id.nil?
-        raise 'no key_id found' if @sec_id.nil?
+        raise 'no key_id configured' if @key_id.nil?
+        raise 'no sec_id configured' if @sec_id.nil?
         raise 'no bucket configured' if @bucket_name.nil?
 
         AWS.config({
@@ -78,7 +78,7 @@ module AwsS3VersionRestorer
         @bucket = @s3.buckets[@bucket_name]
 
         raise 'not exist bucket' unless @s3.buckets[@bucket_name].exists?
-        raise 'not a versinized bucket' unless @s3.buckets[@bucket_name].versioning_enabled?
+        raise 'not a versionized bucket' unless @s3.buckets[@bucket_name].versioning_enabled?
       end
 
     end

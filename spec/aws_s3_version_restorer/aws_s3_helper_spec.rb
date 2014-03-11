@@ -121,7 +121,7 @@ describe AwsS3VersionRestorer::AwsS3Helper, aws_credentials: true do
     end
 
     it 'should raise error when not a versioning bucket' do
-      expect { described_class.config(aws_key_id, aws_sec_key, TEST_BUCKET_NAME) }.to raise_error("not a versinized bucket")
+      expect { described_class.config(aws_key_id, aws_sec_key, TEST_BUCKET_NAME) }.to raise_error("not a versionized bucket")
     end
 
   end
