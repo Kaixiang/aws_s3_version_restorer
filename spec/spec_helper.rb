@@ -13,6 +13,9 @@ SPEC_ROOT = File.expand_path(File.dirname(__FILE__))
 Dir.glob("#{SPEC_ROOT}/support/**/*.rb") { |f| require(f) }
 
 RSpec.configure do |config|
+  config.include AwsS3VersionRestorer::Spec
+  config.include AwsS3VersionRestorer::Spec::CliHelper
+
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus

@@ -33,7 +33,7 @@ describe AwsS3VersionRestorer::AwsS3Helper, aws_credentials: true do
     @s3_helper.init(aws_key_id, aws_sec_key)
   end
 
-  context 'iterate S3 bucket for restored objects' do
+  context 'when iterate S3 bucket for restored objects' do
     before :all do
       @s3_helper.setup_test_bucket(TEST_BUCKET_NAME)
       @time_s0 = timestamp
@@ -62,7 +62,7 @@ describe AwsS3VersionRestorer::AwsS3Helper, aws_credentials: true do
 
   end
 
-  context 'doing actual S3 obj restore' do
+  context 'when doing actual S3 obj restore' do
     before :all do
       @s3_helper.setup_test_bucket(TEST_BUCKET_NAME)
       @time_s2 = timestamp
@@ -110,7 +110,7 @@ describe AwsS3VersionRestorer::AwsS3Helper, aws_credentials: true do
     end
   end
 
-  context 'error handlings' do
+  context 'when handling errors' do
     before :all do
       expect(@s3_helper.bucket_exists?(TEST_BUCKET_NAME)).to be false
       @s3_helper.setup_test_bucket(TEST_BUCKET_NAME, false)
@@ -123,10 +123,9 @@ describe AwsS3VersionRestorer::AwsS3Helper, aws_credentials: true do
     it 'should raise error when not a versioning bucket' do
       expect { described_class.config(aws_key_id, aws_sec_key, TEST_BUCKET_NAME) }.to raise_error("not a versionized bucket")
     end
-
   end
 
-  context 'error handlings without bucket init' do
+  context 'when handling errors without bucket init' do
     it 'should raise error when bucket_name not exist' do
       expect { described_class.config(aws_key_id, aws_sec_key, TEST_BUCKET_NAME) }.to raise_error("not exist bucket")
     end
